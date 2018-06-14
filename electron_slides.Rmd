@@ -1,0 +1,12 @@
+---
+title: 'Shiny meets Electron - Quickly Turn your Shiny app into a standalone desktop app'
+author: "Katie Sasso"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
+    incremental: true
+---
+
+

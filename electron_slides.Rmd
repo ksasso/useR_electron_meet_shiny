@@ -7,6 +7,200 @@ output:
     widescreen: true
     smaller: true
     incremental: true
+runtime: shiny
 ---
 
+<style>
+.column-left{
+  float: left;
+  width: 46%;
+  text-align: left;
+}
+</style>
 
+<style>
+.column-left3{
+  float: left;
+  width: 32%;
+  text-align: left;
+}
+.column-center3{
+  display: inline-block;
+  width: 32%;
+  text-align: center;
+}
+.column-right3{
+  float: right;
+  width: 32%;
+  text-align: right;
+}
+</style>
+
+<style>
+pre {
+  white-space: pre !important;
+  overflow-y: scroll !important;
+  height: 50vh !important;
+}
+</style>
+
+## Overview
+
+<div class="column-left">
+The Columbus Collaboratory Team and Me 
+```{r, echo = FALSE, message=FALSE, warning= FALSE, error=FALSE,out.width = "450px"}
+knitr::include_graphics("/Users/ksasso/Dropbox/R/Rladies/electron_meet_shiny_6.14.18/IMG_5064.jpg")
+```
+</div>
+
+<div class="column-left">
+- Shiny:
+    + Use cases
+    + Deployment options
+    
+- Electron: 
+    + What is it 
+    + How can I ues it to deploy a ShinyApp 
+    + Electron vs. Other deployment options - when does it make sense?
+
+- Materials
+    + https://github.com/ksasso
+    + Specifically the Electron_ShinyApp_Deployment Repo and the useR_electron_meet_shiny repo
+    
+</div>
+
+## Shiny: What is it and Use Cases
+
+<div class="column-left">
+- R Pacakge that allows you to easily build interactive web apps straight from R
+- Several ways to host stand alone applications 
+- Several ways to expand application features using htmlwidgets, shinyjs, and, CSS themes
+</div>
+
+<div class="column-left">
+
+Some common use cases for our clients:
+
+- Automating manual cleansing and manipulation done in excel 
+    + Could even include querying a users internal database provided their credential
+- Data Visualization
+- Getting models into users hands
+    + User can upload data, cleansing and calling of predict can occur in the background, and then user can download model results
+
+</div>
+
+## Shiny: What is it and Use Cases 
+
+<iframe src = "https://shiny.rstudio.com/", style = "width:900px; height:700px"></iframe>
+
+## Shiny: What is it and Use Cases 
+
+##### Automating manual cleansing and manipulation done in excel 
+
+<div class="column-left">
+- User would spend a few hours a week cleansing raw data from internal SQL database in excel to generate reports on key metrics (i.e., pivot tables, aggregating, rolling averages, historical comparisons)
+- All cleaning previously done in excel programmed in R
+- User could then query database every week within Shiny application, click "cleanse" which triggered cleaning code, and then download results
+- Packages Used
+    + DT, openxlsx, shinydashboard,plyr,dplyr,lubridate,RODBC, zoo
+- Key R Functions: 
+    + fileInput, textInput, actionButton, reactive, sqlQuery, downloadButton
+</div>
+
+<div class="column-left">
+
+Shiny App for Automation
+```{r, echo = FALSE, message=FALSE, warning= FALSE, error=FALSE,out.width = "450px"}
+knitr::include_graphics("/Users/ksasso/Dropbox/R/Rladies/electron_meet_shiny_6.14.18/automation_shinyapp_example.png")
+```
+</div>
+
+## Shiny: What is it and Use Cases 
+
+##### Getting models into users hands quickly 
+
+<div class="column-left">
+
+- Users wanted to better predict risk of large IT project portfolios (i.e., going over budget, utilizing greater than expected time or resources)
+- Built a model in XGBoost. User wanted to run model monthly to test it out 
+- Model deployment in a corporation could take months to years
+- Used Electron to package: trained model object, cleansing required, predict function to apply model, download/upload for new runs and results
+- Packages Used
+    + dplyr,tidyr,ggplot2,Matrix,xgboost,openxlsx,scales,shiny,shinydashboard
+- Key R Functions: 
+    + fileInput, textInput, actionButton, reactive,downloadButton, selectizeInput, renderPlot
+</div>
+
+<div class="column-left">
+```{r, echo = FALSE, message=FALSE, warning= FALSE, error=FALSE,out.width = "450px"}
+knitr::include_graphics("/Users/ksasso/Dropbox/R/Rladies/electron_meet_shiny_6.14.18/model_shinyapp.png")
+```
+</div>
+
+## Shiny App Example
+
+```{r, echo = FALSE}
+library(shiny)
+shinyApp(
+  
+  ui = fluidPage(
+    selectInput("region", "Region:", 
+                choices = colnames(WorldPhones)),
+    plotOutput("phonePlot")
+  ),
+  
+  server = function(input, output) {
+    output$phonePlot <- renderPlot({
+      barplot(WorldPhones[,input$region]*1000, 
+              ylab = "Number of Telephones", xlab = "Year")
+    })
+  },
+  
+  options = list(height = 500)
+)
+```
+
+## Shiny App Deployment Options
+
+<iframe src = "https://shiny.rstudio.com/deploy/", style = "width:900px; height:700px"></iframe>
+
+## What is Electron?
+
+<div class="column-left">
+**Electron**
+
+- Electron is a chromium web browswer and a nodeJS runtime brought together in a beautiful harmony to allow us to build client applications on any platform using web technologies
+- Allow users to create native applications with web technologies like JavaScript, HTML, CSS, and ofcourse, Shiny!
+- Same technology messager application "Slack" is packaged in
+- Can use this as a window to shiny applications 
+    + Instance of a browser window in electron 
+</div>
+
+<div class="column-left">
+
+**Electron and RPortable**
+
+- Collaboratory team made the code changes necessary to include ![RPortable](https://sourceforge.net/projects/rportable/) within Electron
+- Limitation: RPortable currently only supported for Windows
+- New Packages installed within R (within electron)
+</div>
+
+## What is Electron  
+
+<iframe src = "https://electronjs.org/", style = "width:900px; height:700px"></iframe>
+
+
+## How Do I use Electron to deploy a ShinyApp?
+
+![Everything you need is on the Collaboratory's public GitHub Repo!](https://github.com/ColumbusCollaboratory/electron-quick-start)
+
+## Electron environment vs. traditional deployment options
+
+**Key Differences**
+
+## Resources
+
+![Many Tutorials on RStudio Website](https://shiny.rstudio.com/tutorial/):
+
+- Some personal favorite sections include the Get Started Video Tutorials, The Gallery, and several of the Articles on Special issues. 
+    + Some of the most frequently used special issues for me included Dashboards, Reacitivty, and Inputs/Outputs

@@ -2,148 +2,78 @@
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;\red5\green99\blue193;}
 {\*\expandedcolortbl;;\csgenericrgb\c1961\c38824\c75686;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\margl1440\margr1440\vieww16460\viewh14420\viewkind0
 \deftab720
 \pard\pardeftab720\ri0\partightenfactor0
 
-\f0\fs36 \cf0 Building Electron using Windows VM and GIT Repository\
-\pard\pardeftab720\ri0\partightenfactor0
+\f0\b\fs28 \cf0 Building Electron using Windows VM and GIT Repository
+\b0 \
+\
 
-\fs28 \cf0 \
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b \cf0 First time users: Follow all steps\
+\b First time users: Follow all steps\
 Return users creating new electron app instance: 
 \b0 search \'93return users\'94 and note # for order of steps. (i.e., \ul return users #1\ulnone )\
+\pard\pardeftab720\ri-720\partightenfactor0
 
-\b \
-Git Repo for Electron/R/Shiny to fork to create new Project \
+\b \cf0 \
+Download or Confirm correct version NodeJS and NPM version or install\
+\pard\pardeftab720\ri-720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://nodejs.org/en/"}}{\fldrslt 
+\b0 \cf0 https://nodejs.org/en/}}\
+\pard\pardeftab720\ri-720\partightenfactor0
+
+\b0 \cf0 node \'96version  (v8.4.0)\
+npm \'96version (v5.3)\
+*note \'96 issues have been ecountered with more recent versions of npm (which is included in NodeJS install- ensure correct version) \
+\pard\pardeftab720\ri0\partightenfactor0
+
+\b \cf0 \
+Git Repo for Electron/R/Shiny to fork to create new Project\
 \pard\pardeftab720\ri0\partightenfactor0
 
 \b0 \cf0 https://github.com/ColumbusCollaboratory/electron-quick-start\
 \pard\pardeftab720\ri0\partightenfactor0
 
 \b \cf0 \
-Starting Windows 10 VM\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b0\fs24 \cf0 Windows 10, Chrome, Atom, NodeJS (current ), Python(v2.7) installed.\
-\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b\fs28 \cf0 Confirm latest NodeJS and NPM version\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b0\fs24 \cf0 node \'96version  (v8.4.0)\
-npm \'96version (v5.3)\
-\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b\fs28 \cf0 Python System Environment Variable\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b0\fs24 \cf0 Updated Windows System Environment Variables to include C:\\Python27\
-\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b\fs28 \cf0 Error MSBuild tools 2.0 running node-gyp for sqlite and node\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b0\fs24 \cf0 For node-gyp Install of npm windows-build-tools\
-npm install \'96global \'96production windows-build-tools\
-After install \'96 right click and \'93Run as Administrator\
-\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b\fs28 \cf0 NPM 5.3 issue July/August 2017\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b0\fs24 \cf0 https://github.com/npm/npm/issues/17781\
-Had to back peddle on npm version 5.3; and downgrade to 5.2\
-npm i \'96g {\field{\*\fldinst{HYPERLINK "%22mailto:npm@5.2%22%20%5Ch"}}{\fldrslt \cf2 \ul \ulc2 npm@5.2}}\
-\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b\fs28 \cf0 Clone Git Repo (clone the new Project repo) 
+Clone Git Repo (clone the new Project repo) 
 \b0 \'96 \ul return users #1
 \b \ulnone \
 \pard\pardeftab720\ri0\partightenfactor0
 
-\b0\fs24 \cf0 git clone https://github.com/ColumbusCollaboratory/electron-quick-start\
-git clone http.sslVerify=false [https://github.com/ColumbusCollaboratory/electron-quick-start]  \
-\pard\pardeftab720\fi720\ri0\partightenfactor0
-\cf0 (
-\i sometimes required if certification issues with https)\
+\b0 \cf0 git clone {\field{\*\fldinst{HYPERLINK "https://github.com/ColumbusCollaboratory/electron-quick-start"}}{\fldrslt \cf2 \ul \ulc2 https://github.com/ColumbusCollaboratory/electron-quick-start}}\
+\
+\pard\pardeftab720\ri-720\partightenfactor0
+
+\b \cf0 Electron Packager Install\
 \pard\pardeftab720\ri0\partightenfactor0
 
-\i0 \cf0 \
+\b0 \cf0 npm i \'96g electron-packager\
 \
 \pard\pardeftab720\ri0\partightenfactor0
 
-\b\fs28 \cf0 Electron Shiny Application (library dependencies) 
+\b \cf0 NPM Install 
 \b0 - \ul return users #2
 \b \ulnone \
 \pard\pardeftab720\ri0\partightenfactor0
 
-\b0\fs24 \cf0 Run R.exe (from R-Portable) and determin if there are any package dependencies that are needed to be installed.\
-\
-Install packages into R (R-Portable Bin ) on Windows.\
-add/commit the new library packages to the new project git repo\
-(If the library should be included in the original electron shiny repo, you can also add it to the original electron shiny repo by running install on a clone of it and committing/pushing the change; or by doing a pull request for the change from the fork to the original electron shiny repo)
-\b\fs28 \
-
-\b0\fs24 \
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b\fs28 \cf0 NPM Install 
-\b0 - \ul return users #2
-\b \ulnone \
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b0\fs24 \cf0 cd [git electron repo] (i.e., cd electron-quick-start)\
+\b0 \cf0 cd [git electron repo] (i.e., cd electron-quick-start)\
 npm install\
 \
 \pard\pardeftab720\ri0\partightenfactor0
 
-\b\fs28 \cf0 NPM Start (show it working)
+\b \cf0 NPM Start (show it working)
 \b0  - \ul return users #3
 \b \ulnone \
 \pard\pardeftab720\ri0\partightenfactor0
 
-\b0\fs24 \cf0 npm start\
+\b0 \cf0 npm start\
 \
 \pard\pardeftab720\ri0\partightenfactor0
 
-\b\fs28 \cf0 Electron Packager Install\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b0\fs24 \cf0 npm i \'96g electron-packager\
-\
-clone \'96 npm install and then run package \
-\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b\fs28 \cf0 Build Electron Windows Executable  
+\b \cf0 Build Electron Windows Executable  
 \b0 - \ul return users #4
 \b \ulnone \
 \pard\pardeftab720\ri0\partightenfactor0
 
-\b0\fs24 \cf0 npm run package-win \
- (NOTE::if you wish to change the Application Executable name you need to change that in the package.json package-win script command\'94)\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b\fs28 \cf0 \
-\
-\
-Share a directory with the Server Windows VM\
-\pard\pardeftab720\ri0\partightenfactor0
-
-\b0\fs24 \cf0 If you need to move files to and from the Windows VM you will need to share a drive.  The following directions are how to do that with Microsoft Remote Desktop.\
-\
-Select the RDP Desktop.\
-Click Edit\
-Select Redirection\
-Check \'93Enable Folder Redirection\'94\
-Click the + to add a new folder redirection.\
-Browse to the Folder you wish to map to the Windows VM.\
+\b0 \cf0 npm run package-win\
 }

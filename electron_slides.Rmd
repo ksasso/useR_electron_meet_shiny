@@ -1,5 +1,5 @@
 ---
-title: 'Shiny meets Electron - Quickly Turn your Shiny app into a standalone desktop app'
+title: 'Shiny meet Electron - Quickly Turn your Shiny app into a standalone desktop app'
 author: "Katie Sasso"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output:
@@ -7,6 +7,7 @@ output:
     widescreen: true
     smaller: true
     incremental: true
+    code_folding: hide
 runtime: shiny
 ---
 
@@ -15,24 +16,6 @@ runtime: shiny
   float: left;
   width: 46%;
   text-align: left;
-}
-</style>
-
-<style>
-.column-left3{
-  float: left;
-  width: 32%;
-  text-align: left;
-}
-.column-center3{
-  display: inline-block;
-  width: 32%;
-  text-align: center;
-}
-.column-right3{
-  float: right;
-  width: 32%;
-  text-align: right;
 }
 </style>
 
@@ -49,62 +32,147 @@ pre {
 <div class="column-left">
 The Columbus Collaboratory Team and Me 
 ```{r, echo = FALSE, message=FALSE, warning= FALSE, error=FALSE,out.width = "450px"}
+library(vembedr)
+library(htmltools)
 knitr::include_graphics("/Users/ksasso/Dropbox/R/Rladies/electron_meet_shiny_6.14.18/IMG_5064.jpg")
 ```
 </div>
 
 <div class="column-left">
-- Shiny:
-    + Use cases
-    + Deployment options
-    
-- Electron: 
-    + What is it 
-    + How can I ues it to deploy a ShinyApp 
-    + Electron vs. Other deployment options - when does it make sense?
+  
+- Electron & Shiny: 
+    + We know Shiny, but What is Electron?
+    + How do Electron & Shiny work together? 
+    + Electron vs. Other deployment options
+    + How can I use Electron to deploy a basic ShinyApp?
+    + Intermediate Use Case 
+    + Additional Considerations
 
 - Materials
-    + https://github.com/ksasso
-    + Specifically the Electron_ShinyApp_Deployment Repo and the useR_electron_meet_shiny repo
+    + https://github.com/ColumbusCollaboratory/electron-quick-start
     
 </div>
 
-## Shiny: What is it and Use Cases
+## We know Shiny, but what is Electron?
 
 <div class="column-left">
-- R Pacakge that allows you to easily build interactive web apps straight from R
-- Several ways to host stand alone applications 
-- Several ways to expand application features using htmlwidgets, shinyjs, and, CSS themes
+
+**Electron**
+
+- Electron is a chromium web browser and a Node.js runtime brought together to allow us to build thick client applications on any platform using web technologies
+- Allow users to create native applications with web technologies like JavaScript, HTML, CSS, and ofcourse, Shiny!
+- Skype, Atom, Slack, and many other Apps built on Electron
+- Chromium and Node.js together launch an instance of a browser window in electron 
+
+</div>
+
+<div class="column-left">
+**Electron, R, and RPortable**
+
+- Collaboratory team made the code changes necessary to include [RPortable](https://sourceforge.net/projects/rportable/) within Electron
+    + We packaged up R alongside Node.js and Chromium 
+    + We then reference R based on its relative path
+    
+</div>
+
+## We know Shiny, but what is Electron?
+
+[ElectronJS](https://electronjs.org/)
+
+<iframe src = "https://electronjs.org/", style = "width:900px; height:700px"></iframe>
+  
+  
+## How do Electron & Shiny work together? 
+
+##### Electron, R, and RPortable  
+
+```{js}
+var appPath = path.join(app.getAppPath(), "app.R" )
+var execPath = "RScript"
+if(process.platform == WINDOWS){
+  killStr = "taskkill /im Rscript.exe /f"
+  appPath = appPath.replace(/\\/g, "\\\\");
+  execPath = path.join(app.getAppPath(), "R-Portable-Win", "bin", "RScript.exe" )
+} else if(process.platform == MACOS){
+  //killStr = 'pkill -9 "R"'
+  execPath = path.join(app.getAppPath(), "R-Portable-Mac", "bin", "Rscript" )
+} else {
+  console.log("not on windows or macos?")
+  throw new Error("not on windows or macos?")
+}
+``` 
+
+## How do Electron & Shiny work together? 
+
+##### Node.js, Chromium, and thick client applications
+
+<div class="column-left">
+- Thick Client Apps
+    + Provide functionality independent of the central server
+    + Run both the user interfcace and server logic on your computer 
+- Node.js
+    + Main, server side process. 
+    + We use Node.js main process to launch the shiny app by redirecting the rendered content to be the URL that the shinyApp is running on (i.e., my home IP address and default port)
+  
+</div>
+
+<div class="column-left">
+- Chromium
+    + Web broweser - the key to the user-interface
+    + Provides a window to the shinyApp
+    + We call the shinyApp function just like you would in RStudio and then direct chormium to our local port where shiny is running
+    
+</div>
+
+##  Electron vs. Other deployment options
+
+<div class="column-left">
+
+- Deploy to the cloud: Shinyapps.io
+    + Deploy up to 5 apps 25 active hours, for free. 
+    + User authentication starting at $99/month
+    + No hardware, installation or contract requried
+    + Requires sending data to the cloud
+- Deploy on-premises: Shiny Server
+    + Deployed behind your firewall
+    + Enterprise grade scaling, security and admin features
+    + IT involvment: you install it and you manage it
+
 </div>
 
 <div class="column-left">
 
-Some common use cases for our clients:
-
-- Automating manual cleansing and manipulation done in excel 
-    + Could even include querying a users internal database provided their credential
-- Data Visualization
-- Getting models into users hands
-    + User can upload data, cleansing and calling of predict can occur in the background, and then user can download model results
+- Deploy on-premises Commercial: Shiny Server Pro
+    + Deploy shinyApp behind a firewall
+    + IT involvment required and only supported on Linux
+    + Increased access controls i(i.e., SSL, LDAP, Active Directory)
+- Deploy on-premises Commercial: RStudio Connect
+    + Added capabilities including in-org publishing and scheduling of multiple content types
+- Creative option: Docker Containers
+    + Stil requires heavy IT involvement to set up initial docker environment
 
 </div>
 
-## Shiny: What is it and Use Cases 
+## How can I use Electron to deploy a basic ShinyApp?
+<iframe width="400" height="200" src="https://www.youtube.com/embed/O56WR-yQFC0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-<iframe src = "https://shiny.rstudio.com/", style = "width:900px; height:700px"></iframe>
+## Intermediate Use Case
 
-## Shiny: What is it and Use Cases 
-
-##### Automating manual cleansing and manipulation done in excel 
+##### Real World Example: Automating manual cleansing and manipulation done in excel 
 
 <div class="column-left">
-- User would spend a few hours a week cleansing raw data from internal SQL database in excel to generate reports on key metrics (i.e., pivot tables, aggregating, rolling averages, historical comparisons)
+
 - All cleaning previously done in excel programmed in R
-- User could then query database every week within Shiny application, click "cleanse" which triggered cleaning code, and then download results
+- User could then query database every week within Shiny application and then download results (how did that work?)
 - Packages Used
-    + DT, openxlsx, shinydashboard,plyr,dplyr,lubridate,RODBC, zoo
+    + DT, openxlsx, shinydashboard, plyr, dplyr, lubridate, RODBC, zoo
 - Key R Functions: 
     + fileInput, textInput, actionButton, reactive, sqlQuery, downloadButton
+- Special adjustments
+    + On Windows: Rtools (for windows) and REnviron.site modifiction
+    + REnviro.site file PATH="${PATH};${R_HOME}\Rtools\bin
+    + On Both: Download new packages 
+    
 </div>
 
 <div class="column-left">
@@ -115,20 +183,28 @@ knitr::include_graphics("/Users/ksasso/Dropbox/R/Rladies/electron_meet_shiny_6.1
 ```
 </div>
 
-## Shiny: What is it and Use Cases 
+## Intermediate Use Case: New Shiny app.R
 
-##### Getting models into users hands quickly 
+<iframe width="400" height="200" src="https://www.youtube.com/embed/NSXWPjBVQXg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+## Intermediate Use Case: New Packages
+<iframe width="400" height="200" src="https://www.youtube.com/embed/HDokkYmJKCk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+## Intermediate Use Case
 
 <div class="column-left">
+##### Real World Example: Getting a model into users hands quickly
 
-- Users wanted to better predict risk of large IT project portfolios (i.e., going over budget, utilizing greater than expected time or resources)
+- Users wanted to better predict risk of large IT project portfolios 
 - Built a model in XGBoost. User wanted to run model monthly to test it out 
-- Model deployment in a corporation could take months to years
 - Used Electron to package: trained model object, cleansing required, predict function to apply model, download/upload for new runs and results
-- Packages Used
-    + dplyr,tidyr,ggplot2,Matrix,xgboost,openxlsx,scales,shiny,shinydashboard
+- Packages Used:
+    + dplyr, tidyr, ggplot2, Matrix, xgboost, openxlsx, scales, shiny, shinydashboard
 - Key R Functions: 
     + fileInput, textInput, actionButton, reactive,downloadButton, selectizeInput, renderPlot
+- Special adjustments
+    + Data stripped from XGBoost train object
+    
 </div>
 
 <div class="column-left">
@@ -137,70 +213,20 @@ knitr::include_graphics("/Users/ksasso/Dropbox/R/Rladies/electron_meet_shiny_6.1
 ```
 </div>
 
-## Shiny App Example
-
-```{r, echo = FALSE}
-library(shiny)
-shinyApp(
-  
-  ui = fluidPage(
-    selectInput("region", "Region:", 
-                choices = colnames(WorldPhones)),
-    plotOutput("phonePlot")
-  ),
-  
-  server = function(input, output) {
-    output$phonePlot <- renderPlot({
-      barplot(WorldPhones[,input$region]*1000, 
-              ylab = "Number of Telephones", xlab = "Year")
-    })
-  },
-  
-  options = list(height = 500)
-)
-```
-
-## Shiny App Deployment Options
-
-<iframe src = "https://shiny.rstudio.com/deploy/", style = "width:900px; height:700px"></iframe>
-
-## What is Electron?
+## Additional Considerations & Resources
 
 <div class="column-left">
-**Electron**
 
-- Electron is a chromium web browswer and a nodeJS runtime brought together in a beautiful harmony to allow us to build client applications on any platform using web technologies
-- Allow users to create native applications with web technologies like JavaScript, HTML, CSS, and ofcourse, Shiny!
-- Same technology messager application "Slack" is packaged in
-- Can use this as a window to shiny applications 
-    + Instance of a browser window in electron 
+- Application size
+    + Stripping particularly large dependencies (i.e., BH package)
 </div>
 
 <div class="column-left">
 
-**Electron and RPortable**
-
-- Collaboratory team made the code changes necessary to include ![RPortable](https://sourceforge.net/projects/rportable/) within Electron
-- Limitation: RPortable currently only supported for Windows
-- New Packages installed within R (within electron)
-</div>
-
-## What is Electron  
-
-<iframe src = "https://electronjs.org/", style = "width:900px; height:700px"></iframe>
-
-
-## How Do I use Electron to deploy a ShinyApp?
-
-![Everything you need is on the Collaboratory's public GitHub Repo!](https://github.com/ColumbusCollaboratory/electron-quick-start)
-
-## Electron environment vs. traditional deployment options
-
-**Key Differences**
-
-## Resources
-
-![Many Tutorials on RStudio Website](https://shiny.rstudio.com/tutorial/):
-
-- Some personal favorite sections include the Get Started Video Tutorials, The Gallery, and several of the Articles on Special issues. 
+- [Many Tutorials on RStudio Website](https://shiny.rstudio.com/tutorial/):
+    + Some personal favorite sections include the Get Started Video Tutorials, The Gallery, and several of the Articles on Special issues. 
     + Some of the most frequently used special issues for me included Dashboards, Reacitivty, and Inputs/Outputs
+    
+- [Everything you need is on the Collaboratory's public GitHub Repo!](https://github.com/ColumbusCollaboratory/electron-quick-start)
+
+</div>

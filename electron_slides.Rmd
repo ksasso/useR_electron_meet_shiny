@@ -6,9 +6,7 @@ output:
   ioslides_presentation:
     widescreen: true
     smaller: true
-    incremental: true
     code_folding: hide
-runtime: shiny
 ---
 
 <style>
@@ -60,8 +58,8 @@ knitr::include_graphics("/Users/ksasso/Dropbox/R/Rladies/electron_meet_shiny_6.1
 **Electron**
 
 - Electron is a chromium web browser and a Node.js runtime brought together to allow us to build thick client applications on any platform using web technologies
-- Allow users to create native applications with web technologies like JavaScript, HTML, CSS, and ofcourse, Shiny!
-- Skype, Atom, Slack, and many other Apps built on Electron
+- Allow users to create native applications with web technologies like JavaScript, HTML, CSS, and of course, Shiny!
+- Skype, Atom, Slack, Visual Studio Code, and many other Apps built on Electron
 - Chromium and Node.js together launch an instance of a browser window in electron 
 
 </div>
@@ -108,17 +106,17 @@ if(process.platform == WINDOWS){
 
 <div class="column-left">
 - Thick Client Apps
-    + Provide functionality independent of the central server
-    + Run both the user interfcace and server logic on your computer 
+    + Provide functionality independent of a remote internet server
+    + Run both the user interface and server logic on your computer 
 - Node.js
-    + Main, server side process. 
+    + Main process, is like the server side process in standard web apps
     + We use Node.js main process to launch the shiny app by redirecting the rendered content to be the URL that the shinyApp is running on (i.e., my home IP address and default port)
   
 </div>
 
 <div class="column-left">
 - Chromium
-    + Web broweser - the key to the user-interface
+    + Web browser - the key to the user-interface
     + Provides a window to the shinyApp
     + We call the shinyApp function just like you would in RStudio and then direct chormium to our local port where shiny is running
     
@@ -131,12 +129,12 @@ if(process.platform == WINDOWS){
 - Deploy to the cloud: Shinyapps.io
     + Deploy up to 5 apps 25 active hours, for free. 
     + User authentication starting at $99/month
-    + No hardware, installation or contract requried
+    + No hardware, installation or contract required
     + Requires sending data to the cloud
 - Deploy on-premises: Shiny Server
     + Deployed behind your firewall
     + Enterprise grade scaling, security and admin features
-    + IT involvment: you install it and you manage it
+    + IT involvement: you install it and you manage it
 
 </div>
 
@@ -144,12 +142,12 @@ if(process.platform == WINDOWS){
 
 - Deploy on-premises Commercial: Shiny Server Pro
     + Deploy shinyApp behind a firewall
-    + IT involvment required and only supported on Linux
+    + IT involvement required and only supported on Linux
     + Increased access controls i(i.e., SSL, LDAP, Active Directory)
 - Deploy on-premises Commercial: RStudio Connect
     + Added capabilities including in-org publishing and scheduling of multiple content types
 - Creative option: Docker Containers
-    + Stil requires heavy IT involvement to set up initial docker environment
+    + Still requires heavy IT involvement to set up initial docker environment
 
 </div>
 
@@ -169,7 +167,7 @@ if(process.platform == WINDOWS){
 - Key R Functions: 
     + fileInput, textInput, actionButton, reactive, sqlQuery, downloadButton
 - Special adjustments
-    + On Windows: Rtools (for windows) and REnviron.site modifiction
+    + On Windows: Rtools (for windows) and REnviron.site modification
     + REnviro.site file PATH="${PATH};${R_HOME}\Rtools\bin
     + On Both: Download new packages 
     
@@ -185,7 +183,7 @@ knitr::include_graphics("/Users/ksasso/Dropbox/R/Rladies/electron_meet_shiny_6.1
 
 ## Intermediate Use Case: New Shiny app.R
 
-<iframe width="400" height="200" src="https://www.youtube.com/embed/NSXWPjBVQXg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="400" height="200" src="https://www.youtube.com/embed/hZXlgdNOqwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Intermediate Use Case: New Packages
 <iframe width="400" height="200" src="https://www.youtube.com/embed/HDokkYmJKCk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -219,6 +217,10 @@ knitr::include_graphics("/Users/ksasso/Dropbox/R/Rladies/electron_meet_shiny_6.1
 
 - Application size
     + Stripping particularly large dependencies (i.e., BH package)
+    + Removing R-Portable-Mac or R-Portable-Win depending on OS
+- Always best to start fresh 
+    + Recommend only running "npm run package-win" once in a given clone to create out directory
+    
 </div>
 
 <div class="column-left">

@@ -46,8 +46,10 @@ knitr::include_graphics("/Users/ksasso/Dropbox/R/Rladies/electron_meet_shiny_6.1
     + Intermediate Use Case 
     + Additional Considerations
 
-- Materials
+- Materials: To use Electron
     + https://github.com/ColumbusCollaboratory/electron-quick-start
+- Material: Presentation Content
+    + https://github.com/ksasso/useR_electron_meet_shiny
     
 </div>
 
@@ -151,7 +153,9 @@ if(process.platform == WINDOWS){
 
 </div>
 
-## How can I use Electron to deploy a basic ShinyApp?
+## Use Electron to deploy a basic ShinyApp
+https://github.com/ksasso/useR_electron_meet_shiny
+
 <iframe width="400" height="200" src="https://www.youtube.com/embed/O56WR-yQFC0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Intermediate Use Case

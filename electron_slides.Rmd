@@ -1,6 +1,6 @@
 ---
 title: 'Shiny meet Electron - Quickly Turn your Shiny app into a standalone desktop app'
-author: "Katie Sasso"
+author: "Katie Sasso, Pete Gordon, Slava Nikitin"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output:
   ioslides_presentation:

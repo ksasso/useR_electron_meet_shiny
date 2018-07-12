@@ -10,7 +10,7 @@
 
 
 
-  <meta name="date" content="2018-07-11" />
+  <meta name="date" content="2018-07-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -94,7 +94,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">July 11, 2018</p>
+            <p style="margin-top: 6px; margin-left: -2px;">July 12, 2018</p>
           </hgroup>
   </slide>
 
@@ -284,11 +284,11 @@ if(process.platform == WINDOWS){
 
 </article></slide><slide class=""><hgroup><h2>Use Electron to deploy a basic ShinyApp</h2></hgroup><article  id="use-electron-to-deploy-a-basic-shinyapp" class="smaller ">
 
-<p><a href='https://github.com/ksasso/useR_electron_meet_shiny' title=''>https://github.com/ksasso/useR_electron_meet_shiny</a></p>
-
 <iframe width="400" height="200" src="https://www.youtube.com/embed/O56WR-yQFC0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 
 </iframe>
+
+<p><a href='https://github.com/ksasso/useR_electron_meet_shiny' title=''>https://github.com/ksasso/useR_electron_meet_shiny</a></p>
 
 </article></slide><slide class=""><hgroup><h2>Intermediate Use Case</h2></hgroup><article  id="intermediate-use-case" class="smaller ">
 
@@ -312,7 +312,7 @@ if(process.platform == WINDOWS){
 
 <ul>
 <li>On Windows: Rtools (for windows) and REnviron.site modification</li>
-<li>REnviro.site file PATH=&quot;\({PATH};\){R_HOME}</li>
+<li>REnviro.site file <code>{js}PATH=&quot;${PATH};${R_HOME}\Rtools\bin</code></li>
 <li>On Both: Download new packages</li>
 </ul></li>
 </ul></div>

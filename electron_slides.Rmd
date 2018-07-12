@@ -154,9 +154,8 @@ if(process.platform == WINDOWS){
 </div>
 
 ## Use Electron to deploy a basic ShinyApp
-https://github.com/ksasso/useR_electron_meet_shiny
-
 <iframe width="400" height="200" src="https://www.youtube.com/embed/O56WR-yQFC0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+https://github.com/ksasso/useR_electron_meet_shiny
 
 ## Intermediate Use Case
 
@@ -172,7 +171,7 @@ https://github.com/ksasso/useR_electron_meet_shiny
     + fileInput, textInput, actionButton, reactive, sqlQuery, downloadButton
 - Special adjustments
     + On Windows: Rtools (for windows) and REnviron.site modification
-    + REnviro.site file PATH="${PATH};${R_HOME}\Rtools\bin
+    + REnviro.site file ```{js}PATH="${PATH};${R_HOME}\Rtools\bin```
     + On Both: Download new packages 
     
 </div>
